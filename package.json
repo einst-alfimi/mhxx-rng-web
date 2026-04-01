@@ -1,0 +1,28 @@
+{
+  "name": "mhxx",
+  "version": "1.0.0",
+  "description": "MHXX RNG tools with minimal web UI",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "serve": "serve docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apmnnn/mhxx-rng.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/apmnnn/mhxx-rng/issues"
+  },
+  "homepage": "https://github.com/apmnnn/mhxx-rng#readme",
+  "devDependencies": {
+    "serve": "^14.2.6"
+  },
+  "private": true
+}

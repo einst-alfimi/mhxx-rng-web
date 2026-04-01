@@ -1,0 +1,208 @@
+<!--
+  Derived in part from apmnnn/mhxx-rng.
+  Original work Copyright (c) 2026 apmnnn, licensed under MIT.
+  HTML/JavaScript adaptation and additions Copyright (c) 2026 einst alfimi,
+  licensed under MIT. See ../LICENSE.
+-->
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MHXX RNG Minimal Web</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1, h2 {
+      margin: 0 0 12px;
+    }
+
+    p {
+      margin: 0 0 16px;
+      color: #cbd5e1;
+    }
+
+    section {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    button {
+      font: inherit;
+      border-radius: 8px;
+      border: 1px solid #4b5563;
+      padding: 10px 12px;
+      background: #111827;
+      color: #e5e7eb;
+    }
+
+    button {
+      cursor: pointer;
+      background: #2563eb;
+      border-color: #2563eb;
+    }
+
+    button.secondary {
+      background: #374151;
+      border-color: #4b5563;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .status {
+      min-height: 24px;
+      margin-top: 8px;
+      color: #93c5fd;
+    }
+
+    .output {
+      margin-top: 12px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid #374151;
+      padding: 8px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    tr.current {
+      background: rgba(37, 99, 235, 0.15);
+    }
+
+    code {
+      font-family: ui-monospace, monospace;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="pageTitle">MHXX RNG 最小 Web 版</h1>
+
+    <section>
+      <h2 id="searchSectionTitle">お守り検索</h2>
+      <div class="grid" style="grid-template-columns: repeat(4, minmax(180px, 1fr));">
+        <label>
+          <span id="localeLabel">言語</span>
+          <select id="localeSelect"></select>
+        </label>
+        <label>
+          <span id="kindLabel">お守り種</span>
+          <select id="kindSelect"></select>
+        </label>
+        <label>
+          <span id="originLabel">原産地</span>
+          <select id="originSelect"></select>
+        </label>
+        <label>
+          <span id="limitLabel">検索回数</span>
+          <input id="limitInput" type="number" min="1" step="1" value="10000">
+        </label>
+      </div>
+      <div class="grid">
+        <label>
+          <span id="skill1Label">第1スキル</span>
+          <select id="skill1Select"></select>
+        </label>
+        <label>
+          <span id="sp1Label">第1SP</span>
+          <select id="sp1Select"></select>
+        </label>
+        <label>
+          <span id="skill2Label">第2スキル</span>
+          <select id="skill2Select"></select>
+        </label>
+        <label>
+          <span id="sp2Label">第2SP</span>
+          <select id="sp2Select"></select>
+        </label>
+        <label>
+          <span id="slotLabel">スロット</span>
+          <select id="slotSelect">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </label>
+      </div>
+      <div class="actions">
+        <button id="searchBtn">検索する</button>
+        <button id="searchGreaterBtn">以上で検索する</button>
+        <button id="cancelJobBtn" class="secondary" disabled>実行中ジョブをキャンセル</button>
+        <button id="presetCrisisBtn" class="secondary">サンプル: 窮地4 回量2 S0</button>
+        <button id="presetChainCritBtn" class="secondary">サンプル: 連撃4 痛撃5 S3</button>
+      </div>
+      <div id="searchStatus" class="status"></div>
+      <div id="searchOutput" class="output"></div>
+    </section>
+
+    <section>
+      <h2 id="aroundSectionTitle">前後表示</h2>
+      <div class="grid">
+        <label>
+          <span id="aroundFrameLabel">基準フレーム</span>
+          <input id="aroundFrameInput" type="number" min="0" step="1" value="1725">
+        </label>
+        <label>
+          <span id="aroundRadiusLabel">前後幅</span>
+          <input id="aroundRadiusInput" type="number" min="1" step="1" value="20">
+        </label>
+      </div>
+      <div class="actions">
+        <button id="aroundBtn">表示する</button>
+      </div>
+      <div id="aroundOutput" class="output"></div>
+    </section>
+  </main>
+
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
